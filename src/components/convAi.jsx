@@ -1,26 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-const ConvAi= () => {
-  const agentId = 'RIP9urgASUFtXBa4lBoX';
+const ConvAi = () => {
+  const agentId = "RIP9urgASUFtXBa4lBoX";
+  const [scriptLoaded, setScriptLoaded] = useState(false);
 
   useEffect(() => {
-    try {
-      if (!document.querySelector("script[src='https://elevenlabs.io/convai-widget/index.js']")) {
-        const script = document.createElement("script");
-        script.src = "https://elevenlabs.io/convai-widget/index.js";
-        script.async = true;
-        script.type = "text/javascript";
-        script.onerror = (e) => console.error("Failed to load ElevenLabs script:", e);
-        document.body.appendChild(script);
-      }
-    } catch (error) {
-      console.error("Error loading ElevenLabs script:", error);
+    const scriptUrl = "https://elevenlabs.io/convai-widget/index.js";
+
+    if (!document.querySelector(`script[src="${scriptUrl}"]`)) {
+      const script = document.createElement("script");
+      script.src = scriptUrl;
+      script.async = true;
+      script.type = "text/javascript";
+
+      script.onload = () => setScriptLoaded(true);
+      script.onerror = (e) => console.error("Failed to load ElevenLabs script:", e);
+
+      document.body.appendChild(script);
+    } else {
+      setScriptLoaded(true);
     }
   }, []);
 
   return (
     <div>
-      <elevenlabs-convai agent-id="RIP9urgASUFtXBa4lBoX"></elevenlabs-convai>
+      {scriptLoaded ? (
+        <elevenlabs-convai agent-id={agentId}></elevenlabs-convai>
+      ) : (
+        <p>Loading AI assistant...</p>
+      )}
     </div>
   );
 };
