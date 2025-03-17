@@ -1,5 +1,5 @@
 import React from 'react';
-import wallImage from './assets/image.png';
+import wallImage from './assets/images.png';
 import ConvAi from './components/convAi';
 import './App.css';
 

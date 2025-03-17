@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const ConvAi = () => {
-  const agentId = "RIP9urgASUFtXBa4lBoX";
+  const agentId = "1jZp9Jt7mZy8WZgBUBv8";
   const [scriptLoaded, setScriptLoaded] = useState(false);
 
   useEffect(() => {
@@ -20,11 +20,12 @@ const ConvAi = () => {
     } else {
       setScriptLoaded(true);
     }
+   
   }, []);
-
   return (
     <div>
       {scriptLoaded ? (
+        // <elevenlabs-convai agent-id={agentId}></elevenlabs-convai>
         <elevenlabs-convai agent-id={agentId}></elevenlabs-convai>
       ) : (
         <p>Loading AI assistant...</p>
